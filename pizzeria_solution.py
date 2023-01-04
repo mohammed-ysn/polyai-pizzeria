@@ -2,8 +2,8 @@ import itertools
 import numpy as np
 
 # debugging
-# import sys
-# sys.stdin = open("input.txt", "r")
+import sys
+sys.stdin = open("input.txt", "r")
 
 N, M = (int(x) for x in input().split())
 assert 1 <= N <= 10000
@@ -36,7 +36,6 @@ for pizzeria in range(M):
             )
 
             for block_y, block_x in reachable_blocks:
-                print(block_y, block_x)
                 if 0 <= block_x < N and 0 <= block_y < N:
                     pizzeria_reach[block_y][block_x] = 1
 
