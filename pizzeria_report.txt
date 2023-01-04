@@ -17,7 +17,6 @@ Finally, I determined to visit only reachable blocks per pizzeria and no extra. 
 ==========
 Complexity
 ==========
-
 The time complexity of the final solution is O(M * (R_max)^2), where R_max is the largest radius of all the pizzerias. Updating the blocks a pizzeria can reach has order O(R^2), and there are M pizzerias.
 
 The space complexity of the final solution is O(N^2), derived from the space required to store the city's NxN matrix.
@@ -25,7 +24,6 @@ The space complexity of the final solution is O(N^2), derived from the space req
 ============
 Improvements
 ============
-
 I believe the solution is optimal in its time complexity. For each of the M pizzerias, the program must consider all blocks within its radius at a minimum. There may be constant factor improvements.
 
 The space complexity can be improved, but not without increasing the time complexity. We can achieve a space complexity of O(1) by considering one block at a time instead of storing the whole city. However, this would increase the time complexity to O(M * N^2).
