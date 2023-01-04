@@ -1,44 +1,50 @@
 import itertools
 import numpy as np
 
-# debugging
-import sys
-sys.stdin = open("input.txt", "r")
 
-N, M = (int(x) for x in input().split())
-assert 1 <= N <= 10000
-assert 1 <= M <= 10000
+def main(debug=False):
+    if debug:
+        import sys
+        sys.stdin = open("input.txt", "r")
 
-city = np.zeros(shape=(N, N), dtype=int)
+    n, m = (int(x) for x in input().split())
+    assert 1 <= n <= 10000
+    assert 1 <= m <= 10000
 
-for pizzeria in range(M):
-    X, Y, R = (int(x) for x in input().split())
-    assert 1 <= X <= N
-    assert 1 <= Y <= N
-    assert 1 <= R <= 5000
+    city = np.zeros(shape=(n, n), dtype=int)
 
-    # convert 1-based indexing to 0-based
-    X -= 1
-    Y -= 1
+    for pizzeria in range(m):
+        x, y, r = (int(x) for x in input().split())
+        assert 1 <= x <= n
+        assert 1 <= y <= n
+        assert 1 <= r <= 5000
 
-    pizzeria_reach = np.zeros(shape=(N, N), dtype=int)
+        # convert 1-based indexing to 0-based
+        x -= 1
+        y -= 1
 
-    for y_offset in range(R + 1):
-        for x_offset in range(R + 1):
-            if x_offset + y_offset > R:
-                # exceeded max dist
-                continue
+        pizzeria_reach = np.zeros(shape=(n, n), dtype=int)
 
-            # generate all block coordinates with the current x and y
-            # offsets in positive and negative directions
-            reachable_blocks = itertools.product(
-                [Y + y_offset, Y - y_offset], [X + x_offset, X - x_offset]
-            )
+        for y_offset in range(r + 1):
+            for x_offset in range(r + 1):
+                if x_offset + y_offset > r:
+                    # exceeded max dist
+                    continue
 
-            for block_y, block_x in reachable_blocks:
-                if 0 <= block_x < N and 0 <= block_y < N:
-                    pizzeria_reach[block_y][block_x] = 1
+                # generate all block coordinates with the current x and y
+                # offsets in positive and negative directions
+                reachable_blocks = itertools.product(
+                    [y + y_offset, y - y_offset], [x + x_offset, x - x_offset]
+                )
 
-    city += pizzeria_reach
+                for block_y, block_x in reachable_blocks:
+                    if 0 <= block_x < n and 0 <= block_y < n:
+                        pizzeria_reach[block_y][block_x] = 1
 
-print(np.max(city))
+        city += pizzeria_reach
+
+    print(np.max(city))
+
+
+if __name__ == "__main__":
+    main(debug=True)
