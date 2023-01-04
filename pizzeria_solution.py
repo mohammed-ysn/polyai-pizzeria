@@ -29,8 +29,8 @@ for pizzeria in range(M):
                 # exceeded max dist
                 continue
 
-            # generate all block coordinates with the current x and y offsets
-            # in positive and negative directions
+            # generate all block coordinates with the current x and y
+            # offsets in positive and negative directions
             reachable_blocks = itertools.product(
                 [Y + y_offset, Y - y_offset], [X + x_offset, X - x_offset]
             )
