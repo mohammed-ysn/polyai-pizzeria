@@ -22,9 +22,9 @@ The time complexity of the final solution is O(M * (R_max)^2), where R_max is th
 
 The space complexity of the final solution is O(N^2), derived from the space required to store the city's NxN matrix.
 
-===========
-Improvement
-===========
+============
+Improvements
+============
 
 I believe the solution is optimal in its time complexity. For each of the M pizzerias, the program must consider all blocks within its radius at a minimum. There may be constant factor improvements.
 
