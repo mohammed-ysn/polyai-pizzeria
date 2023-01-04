@@ -14,26 +14,28 @@ def main(debug=False):
     city = np.zeros(shape=(n, n), dtype=int)
 
     for pizzeria in range(m):
-        x_centre, y_centre, r = (int(x) for x in input().split())
-        assert 1 <= x_centre <= n
-        assert 1 <= y_centre <= n
+        x, y, r = (int(x) for x in input().split())
+        assert 1 <= x <= n
+        assert 1 <= y <= n
         assert 1 <= r <= 5000
 
         # convert 1-based indexing to 0-based
-        x_centre -= 1
-        y_centre -= 1
+        x -= 1
+        y -= 1
 
-        # iterate through the square of length 2r + 1
-        # centred at the pizzeria
-        for y in range(max(y_centre - r, 0), min(y_centre + r + 1, n)):
-            for x in range(max(x_centre - r, 0), min(x_centre + r + 1, n)):
-                if abs(x - x_centre) + abs(y - y_centre) > r:
-                    continue
+        # iterate through all reachable blocks from the pizzeria
+        for dy in range(-r, r + 1):
+            for dx in range(-r + abs(dy), r - abs(dy) + 1):
+                # check if block is within the city
+                if 0 <= y + dy < n and 0 <= x + dx < n:
+                    city[y + dy][x + dx] += 1
 
-                city[y][x] += 1
+        if debug:
+            print(city)
 
     print(np.max(city))
 
 
 if __name__ == "__main__":
-    main(debug=True)
+    # main(debug=True)
+    main()
