@@ -1,3 +1,6 @@
+=====================
+Thoughts and approach
+=====================
 My full solution journey is here: https://github.com/mohammed-ysn/polyai-pizzeria/commits/main
 
 I started off with an inefficient solution and progressively improved it. The common idea throughout the solutions is to create an NxN matrix representing the city. Initialise all blocks to 0 and increment a block by 1 whenever it is reachable by a pizzeria. Finally, find and output the maximum value inside the matrix which signifies the maximum number of pizzerias that can reach a single block.
@@ -11,6 +14,18 @@ I then determined on visiting each block at most one time for each pizzeria, whi
 Solution 3 (final): https://github.com/mohammed-ysn/polyai-pizzeria/commit/3822d4d5f9de05b11f5333760300449b4897c65a
 Finally, I determined to visit only reachable blocks per pizzeria and no extra. After some thought, I formulated two for loops with some dynamic bounds to achieve just that.
 
+==========
+Complexity
+==========
+
 The time complexity of the final solution is O(M * (R_max)^2), where R_max is the largest radius of all the pizzerias. Updating the blocks a pizzeria can reach has order O(R^2), and there are M pizzerias.
 
 The space complexity of the final solution is O(N^2), derived from the space required to store the city's NxN matrix.
+
+===========
+Improvement
+===========
+
+I believe the solution is optimal in its time complexity. For each of the M pizzerias, the program must consider all blocks within its radius at a minimum. There may be constant factor improvements.
+
+The space complexity can be improved, but not without increasing the time complexity. We can achieve a space complexity of O(1) by considering one block at a time instead of storing the whole city. However, this would increase the time complexity to O(M * N^2).
