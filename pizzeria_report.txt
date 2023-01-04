@@ -1,0 +1,16 @@
+My full solution journey is here: https://github.com/mohammed-ysn/polyai-pizzeria/commits/main
+
+I started off with an inefficient solution and progressively improved it. The common idea throughout the solutions is to create an NxN matrix representing the city. Initialise all blocks to 0 and increment a block by 1 whenever it is reachable by a pizzeria. Finally, find and output the maximum value inside the matrix which signifies the maximum number of pizzerias that can reach a single block.
+
+Solution 1: https://github.com/mohammed-ysn/polyai-pizzeria/commit/b7528b1279082386492d2b76341f720b9f1e5501
+My first solution made use of the itertools.product function to produce all possible blocks given negative and positive x-y offsets. However, I realised that as the radius value, R, would increase, the number of possible x-y offset pairs would grow unsustainably, and the program would visit the same block potentially many times per pizzeria. Hence, I had to rethink my solution.
+
+Solution 2: https://github.com/mohammed-ysn/polyai-pizzeria/commit/dc9db5148f369862a62472989169b4222c906404
+I then determined on visiting each block at most one time for each pizzeria, which formed the framework for my second solution. I knew that the reachable blocks from a pizzeria lay within a square, centred at the pizzeria with length 2R + 1 (R to the right/up, R to the left/down, and 1 more for the centre). Hence, if I iterated through this square, I was guaranteed to see every reachable block only once, as well as some extra blocks towards the corners of the square that were out of reach from the pizzeria.
+
+Solution 3 (final): https://github.com/mohammed-ysn/polyai-pizzeria/commit/3822d4d5f9de05b11f5333760300449b4897c65a
+Finally, I determined to visit only reachable blocks per pizzeria and no extra. After some thought, I formulated two for loops with some dynamic bounds to achieve just that.
+
+The time complexity of the final solution is O(M * (R_max)^2), where R_max is the largest radius of all the pizzerias. Updating the blocks a pizzeria can reach has order O(R^2), and there are M pizzerias.
+
+The space complexity of the final solution is O(N^2), derived from the space required to store the city's NxN matrix.
